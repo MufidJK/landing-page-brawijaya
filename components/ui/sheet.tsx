@@ -1,4 +1,5 @@
 "use client"
+// shadcn/ui primitive: Sheet (mobile menu slide-in)
 
 import * as React from "react"
 import * as SheetPrimitive from "@radix-ui/react-dialog"

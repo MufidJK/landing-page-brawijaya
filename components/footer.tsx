@@ -5,11 +5,11 @@ import { buildWaLink } from '@/lib/wa';
 import { Separator } from '@/components/ui/separator';
 
 export default function Footer() {
-  const waLink = buildWaLink(`Halo Kak ${site.marketing.name}, saya tertarik dengan The Brawijaya dan ingin informasi lebih lanjut 🙏`);
+  const waLink = buildWaLink(`Halo Ibu ${site.marketing.name}, saya tertarik dengan The Brawijaya dan ingin informasi lebih lanjut!`);
   const enabledNavItems = navItems.filter((item) => item.enabled);
 
   return (
-    <footer className="bg-[#0F3D2E] text-[#F7F3EA] py-12 px-4">
+    <footer className="bg-brand-emerald text-brand-ivory py-12 px-4">
       <div className="container mx-auto max-w-6xl">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
@@ -20,22 +20,22 @@ export default function Footer() {
               alt="The Brawijaya"
               width={150}
               height={107}
-              className="w-[120px] h-auto brightness-0 invert mb-3"
+              className="w-30 h-auto brightness-0 invert mb-3"
             />
-            <p className="text-sm text-[#F7F3EA]/80">
+            <p className="text-sm text-brand-ivory/80">
               {site.description}
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-semibold text-[#C8A24A] mb-3">Navigasi</h4>
+            <h4 className="font-semibold text-brand-gold mb-3">Navigasi</h4>
             <ul className="space-y-2">
               {enabledNavItems.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="text-sm text-[#F7F3EA]/80 hover:text-[#C8A24A] transition-colors"
+                    className="text-sm text-brand-ivory/80 hover:text-brand-gold transition-colors"
                   >
                     {item.label}
                   </Link>
@@ -46,15 +46,15 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="font-semibold text-[#C8A24A] mb-3">Kontak</h4>
-            <ul className="space-y-2 text-sm text-[#F7F3EA]/80">
+            <h4 className="font-semibold text-brand-gold mb-3">Kontak</h4>
+            <ul className="space-y-2 text-sm text-brand-ivory/80">
               <li>
                 <span className="font-medium">Marketing:</span>{' '}
                 <a
                   href={waLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-[#C8A24A] transition-colors"
+                  className="hover:text-brand-gold transition-colors"
                 >
                   {site.marketing.name}
                 </a>
@@ -67,7 +67,7 @@ export default function Footer() {
                   href={`https://instagram.com/${site.instagram}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-[#C8A24A] transition-colors"
+                  className="hover:text-brand-gold transition-colors"
                 >
                   @{site.instagram}
                 </a>
@@ -77,10 +77,10 @@ export default function Footer() {
           </div>
         </div>
 
-        <Separator className="bg-[#C8A24A]/30 mb-6" />
+        <Separator className="bg-brand-gold/30 mb-6" />
 
         {/* Bottom */}
-        <div className="space-y-3 text-sm text-[#F7F3EA]/70 text-center md:text-left">
+        <div className="space-y-3 text-sm text-brand-ivory/70 text-center md:text-left">
           <p>Developed by {site.developer}</p>
           <p className="text-xs">
             Gambar dan ilustrasi yang ditampilkan adalah visualisasi pemasaran. 

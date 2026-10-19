@@ -5,27 +5,24 @@ import { site } from '@/lib/site';
 import { Button } from '@/components/ui/button';
 
 export default function Hero() {
-  const waLink = buildWaLink(`Halo Kak ${site.marketing.name}, saya tertarik dengan The Brawijaya dan ingin informasi lebih lanjut 🙏`);
+  const waLink = buildWaLink(`Halo Ibu ${site.marketing.name}, saya tertarik dengan The Brawijaya dan ingin informasi lebih lanjut!`);
   
   return (
-    <section id="beranda" className="relative bg-[#0F3D2E] min-h-[100svh] scroll-mt-[72px]">
+    <section id="beranda" className="relative bg-brand-emerald min-h-[100svh] scroll-mt-18">
       {/* Hero Image */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-x-0 top-0 h-[60svh] md:inset-0 md:h-auto z-0">
         <Image
           src={getCloudinaryUrl('hero-gerbang_p7bmqb', 'f_auto,q_auto,w_1920')}
           alt="The Brawijaya entrance gate illustration"
           fill
           priority
-          className="object-cover object-[60%_0%] md:object-[50%_20%]"
+          className="object-cover object-[70%_0%] md:object-[50%_20%]"
           sizes="100vw"
         />
         {/* Gradient overlay — lower-left for text */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent md:bg-gradient-to-r md:from-black/70 md:via-black/40 md:to-transparent" />
-        
-        {/* Illustration label */}
-        <div className="absolute bottom-4 left-4 text-xs text-white/60 bg-black/20 px-2 py-1 rounded">
-          Ilustrasi
-        </div>
+        <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/30 to-transparent md:bg-linear-to-r md:from-black/70 md:via-black/40 md:to-transparent" />
+        {/* Mobile-only fade to emerald */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-linear-to-b from-transparent to-brand-emerald md:hidden" />
       </div>
 
       {/* Content — vertically centered, left-aligned */}
@@ -39,11 +36,11 @@ export default function Hero() {
             {site.brand} — {site.description}
           </p>
           
-          <p className="text-2xl md:text-3xl font-semibold mb-8 text-[#C8A24A]">
+          <p className="text-2xl md:text-3xl font-semibold mb-8 text-brand-gold">
             Mulai dari {site.priceFrom}
           </p>
           
-          <Button asChild size="lg" className="bg-[#C8A24A] hover:bg-[#B8943A] text-[#1F2421] font-semibold shadow-lg hover:shadow-xl transition-all">
+          <Button asChild size="lg" className="bg-brand-gold hover:bg-brand-gold-hover text-brand-charcoal font-semibold shadow-lg hover:shadow-xl transition-all">
             <a
               href={waLink}
               target="_blank"

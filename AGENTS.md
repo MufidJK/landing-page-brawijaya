@@ -49,13 +49,16 @@ back to serif. In `app/layout.tsx`, confirm:
 
 **Phase 3 — Testing infra**
 ```
-npm install -D jest jest-environment-jsdom @testing-library/react @testing-library/jest-dom
+npm install -D jest jest-environment-jsdom @testing-library/react @testing-library/jest-dom @testing-library/dom @testing-library/user-event ts-node @types/jest
 ```
 - `jest.config.ts` must include `moduleNameMapper` for the `@/*` path alias
   so imports resolve the same way they do in the app
-- Add to `package.json` scripts: `"prebuild": "rm -rf .next"` (clears stale
-  build cache before each build — avoids stale-chunk issues on Vercel
-  redeploys), plus `"test"` and `"test:watch"`
+- Add to `package.json` scripts:
+  - `"prebuild": "node -e \"require('fs').rmSync('.next',{recursive:true,force:true})\""` (cross-platform .next cache clear)
+  - `"typecheck": "tsc --noEmit"`
+  - `"lint": "eslint ."`
+  - `"test": "jest --ci"`, `"test:watch": "jest --watch"`
+  - `"check": "npm run typecheck && eslint . --max-warnings 0 && npm test"` (full quality gate)
 
 ## 3. Non-Negotiable Coding Rules
 
@@ -69,6 +72,10 @@ npm install -D jest jest-environment-jsdom @testing-library/react @testing-libra
   introduce a form submission endpoint (see architecture.md for why).
 - **Always use `next/image`**, never raw `<img>`. Every image needs
   meaningful `alt` text (not filenames, not "image1").
+- **No arbitrary hex colors in className** (e.g. `text-[#1F2421]`). Use
+  the brand tokens from the `@theme` block in `globals.css`; if a token
+  is missing, add it there. Tailwind IntelliSense suggestions count as
+  warnings: the editor Problems panel must be at 0 for every touched file.
 - **Tailwind v4 token safety:** before adding a custom CSS variable in
   `globals.css`, check it doesn't collide with a Tailwind reserved key
   (e.g. `--spacing-*` overriding `max-w-*` utilities). This exact bug
@@ -76,7 +83,7 @@ npm install -D jest jest-environment-jsdom @testing-library/react @testing-libra
   not just visually in the editor.
 - **No hardcoded secrets or phone numbers scattered across files.** WA
   number, Cloudinary cloud name, and any other config values live in one
-  constants file (e.g. `lib/config.ts`) or `.env` as appropriate.
+  constants file (e.g. `lib/site.ts`) or `.env` as appropriate.
 - **Every `useEffect` that subscribes to something must clean up after
   itself.** This means: event listeners (`scroll`, `resize`), `setTimeout`/
   `setInterval`, `IntersectionObserver`/`MutationObserver`, media query
@@ -85,7 +92,7 @@ npm install -D jest jest-environment-jsdom @testing-library/react @testing-libra
   bug, not a style nitpick — it's how components leak memory and crash
   long-running sessions. Review every `useEffect` against this before
   marking a component done.
-- **Zero warnings, zero errors — no exceptions.** `next lint` and
+- **Zero warnings, zero errors — no exceptions.** `npm run lint` (eslint . --max-warnings 0) and
   `tsc --noEmit` must both come back completely clean, not just "no
   errors, a few warnings." A yellow squiggle is still a defect. Do not
   suppress a warning with an eslint-disable comment to make it go away —
@@ -133,7 +140,7 @@ A task is done only when:
 - it matches prd.md requirements
 - `npm test` passes fully
 - `tsc --noEmit` is clean — zero errors
-- `next lint` is clean — **zero warnings, zero errors**
+- `npm run lint` (eslint . --max-warnings 0) is clean — **zero warnings, zero errors**
 - every `useEffect` with a subscription/listener/timer has a verified
   cleanup function
 - passes the security checklist above
@@ -141,6 +148,9 @@ A task is done only when:
 
 Do not report a task complete if any of the above is not met — "mostly
 clean" or "just a few warnings" is not done.
+
+Task prompts that say "minimal patch" or "stop after this" never waive §3, §4 or §7.
+The raw output of `npm run check` must be pasted in every completion report.
 
 <!-- BEGIN:nextjs-agent-rules -->
 

@@ -87,7 +87,7 @@ export default function Navbar() {
     };
   }, []);
 
-  const waLink = buildWaLink(`Halo Kak ${site.marketing.name}, saya tertarik dengan The Brawijaya dan ingin informasi lebih lanjut 🙏`);
+  const waLink = buildWaLink(`Halo Ibu ${site.marketing.name}, saya tertarik dengan The Brawijaya dan ingin informasi lebih lanjut!`);
 
   const enabledNavItems = navItems.filter((item) => item.enabled);
 
@@ -103,13 +103,13 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 h-[72px] transition-all duration-300 ${
-        scrolled ? 'bg-[#F7F3EA] shadow-lg' : 'bg-transparent'
+      className={`fixed top-0 left-0 right-0 z-50 h-18 transition-all duration-300 ${
+        scrolled ? 'bg-brand-ivory shadow-lg' : 'bg-transparent'
       }`}
     >
       {/* Dark gradient behind transparent navbar */}
       {!scrolled && (
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-linear-to-b from-black/40 to-transparent pointer-events-none" />
       )}
       <div className="container mx-auto px-4 h-full flex items-center justify-between relative z-10">
         {/* Logo */}
@@ -130,27 +130,27 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-8">
           {enabledNavItems.map((item) => {
             const isActive = activeSection === item.href.slice(1);
-            const activeColor = scrolled ? 'text-[#0F3D2E]' : 'text-[#C8A24A]';
-            const inactiveColor = scrolled ? 'text-[#1F2421]' : 'text-white';
+            const activeColor = scrolled ? 'text-brand-emerald' : 'text-brand-gold';
+            const inactiveColor = scrolled ? 'text-brand-charcoal' : 'text-white';
             
             return (
               <Link
                 key={item.href}
                 href={item.href}
                 className={`relative text-[13px] uppercase tracking-[0.16em] transition-colors group ${
-                  isActive ? `${activeColor} ${scrolled ? 'font-semibold' : 'font-medium'}` : `${inactiveColor} font-medium hover:text-[#C8A24A]`
+                  isActive ? `${activeColor} ${scrolled ? 'font-semibold' : 'font-medium'}` : `${inactiveColor} font-medium hover:text-brand-gold`
                 }`}
                 onClick={(e) => handleNavClick(e, item.href)}
                 aria-current={isActive ? 'location' : undefined}
               >
                 {item.label}
-                <span className="absolute left-0 bottom-[-8px] h-[1px] bg-[#C8A24A] w-full scale-x-0 group-hover:scale-x-100 group-focus:scale-x-100 transition-transform duration-300 origin-left" />
+                <span className="absolute left-0 -bottom-2 h-px bg-brand-gold w-full scale-x-0 group-hover:scale-x-100 group-focus-visible:scale-x-100 transition-transform duration-300 origin-left" />
               </Link>
             );
           })}
           <Button
             asChild
-            className="h-9 px-5 bg-[#C8A24A] hover:bg-[#B8943A] text-[#1F2421] text-[13px] uppercase tracking-wide font-semibold"
+            className="h-9 px-5 bg-brand-gold hover:bg-brand-gold-hover text-brand-charcoal text-[13px] uppercase tracking-wide font-semibold"
           >
             <a href={waLink} target="_blank" rel="noopener noreferrer">
               Hubungi Kami
@@ -164,13 +164,13 @@ export default function Navbar() {
             <Button
               variant="ghost"
               size="icon"
-              className={`transition-colors ${scrolled ? 'text-[#1F2421] hover:text-[#C8A24A]' : 'text-white hover:text-[#C8A24A]'} hover:bg-transparent`}
+              className={`transition-colors ${scrolled ? 'text-brand-charcoal hover:text-brand-gold' : 'text-white hover:text-brand-gold'} hover:bg-transparent`}
             >
               <Menu className="h-6 w-6" />
               <span className="sr-only">Open menu</span>
             </Button>
           </SheetTrigger>
-          <SheetContent side="right" className="bg-[#F7F3EA]">
+          <SheetContent side="right" className="bg-brand-ivory">
             <SheetHeader>
               <SheetTitle className="flex justify-center">
                 <Image
@@ -178,7 +178,7 @@ export default function Navbar() {
                   alt="The Brawijaya"
                   width={150}
                   height={107}
-                  className="w-[120px] h-auto"
+                  className="w-30 h-auto"
                 />
               </SheetTitle>
             </SheetHeader>
@@ -190,7 +190,7 @@ export default function Navbar() {
                     key={item.href}
                     href={item.href}
                     className={`text-lg font-medium uppercase tracking-wide transition-colors ${
-                      isActive ? 'text-[#C8A24A]' : 'text-[#1F2421] hover:text-[#C8A24A]'
+                      isActive ? 'text-brand-gold' : 'text-brand-charcoal hover:text-brand-gold'
                     }`}
                     onClick={(e) => {
                       handleNavClick(e, item.href);
@@ -203,7 +203,7 @@ export default function Navbar() {
               })}
               <Button
                 asChild
-                className="bg-[#C8A24A] hover:bg-[#B8943A] text-[#1F2421] font-semibold mt-4 uppercase tracking-wide"
+                className="bg-brand-gold hover:bg-brand-gold-hover text-brand-charcoal font-semibold mt-4 uppercase tracking-wide"
               >
                 <a href={waLink} target="_blank" rel="noopener noreferrer">
                   Hubungi Kami

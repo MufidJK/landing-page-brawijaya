@@ -28,60 +28,61 @@ deliberate choice, not a gap:
   revisit — could move copy to a local JSON/MDX file and use ISR with a
   long revalidate window, still no database).
 
-## 3. Folder Structure (proposed)
+## 3. Folder Structure (actual)
 
 ```
 app/
   layout.tsx          — root layout, fonts, metadata
-  page.tsx             — assembles all sections in order
-  globals.css
+  page.tsx            — assembles all sections in order
+  globals.css         — @theme brand tokens (emerald, gold, ivory, charcoal)
 components/
   sections/
-    hero.tsx
-    promo-banner.tsx
-    gallery.tsx
-    unit-types.tsx      — Aryasatya / Adhinata tabs or cards
-    bonus-list.tsx
-    location-highlights.tsx
-    contact-cta.tsx
-  ui/                   — shadcn/ui primitives
-  whatsapp-cta.tsx       — shared CTA button component (wa.me link builder)
+    hero.tsx          — built
+    unit-section.tsx  — built (reusable: Aryasatya ivory, Adhinata emerald)
+    location.tsx      — built
+    (planned: keunggulan.tsx, galeri.tsx, legalitas.tsx, kontak.tsx)
+  navbar.tsx          — built (scroll-spy, responsive Sheet on mobile)
+  footer.tsx          — built
+  floating-whatsapp.tsx — built
+  ui/                 — shadcn/ui primitives (button, badge, dialog, card, separator, sheet)
 lib/
-  config.ts             — WA number, Cloudinary cloud name, unit data
-  cloudinary.ts          — next/image loader function
-data/
-  units.ts               — Aryasatya/Adhinata spec objects (typed)
-  gallery.ts              — curated Cloudinary image list + alt text
+  site.ts             — config: WA number, marketing contact, brand name, nav items, priceFrom, bookingFee, installmentFrom
+  units.ts            — Aryasatya/Adhinata typed spec objects + FLOOR_PLAN_LABELS
+  location.ts         — 6 location items with distances
+  cloudinary.ts       — getCloudinaryUrl helper for next/image
+  wa.ts               — buildWaLink helper
+  utils.ts            — cn (clsx + tailwind-merge)
+public/
+  logo-the-brawijaya.webp — 150x107px transparent logo
 ```
 
 ## 4. Image Pipeline (Cloudinary)
 
-- Images live in a Cloudinary account (mak's photos get uploaded there
-  manually or via Cloudinary's upload widget — not through this app).
-- `next/image` uses a custom loader (`lib/cloudinary.ts`) that builds
+- Images live in a Cloudinary account (cloud name: `dcsh47583`).
+- `next/image` uses `getCloudinaryUrl` helper from `lib/cloudinary.ts` that builds
   Cloudinary transformation URLs (`f_auto,q_auto,w_{width}`) so images
   are auto-optimized per device without running our own image server.
-- Only the **image path/public ID** is stored in `data/gallery.ts`, not
-  full URLs — keeps it swappable if the Cloudinary cloud name changes.
+- Only the **image public ID** is stored in code (e.g. `hero-gerbang_p7bmqb`,
+  `aryasatya1_vywvat`), not full URLs — keeps it swappable if the cloud changes.
 
 ## 5. Config & Environment
 
-- `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME` — safe to expose (it's just a CDN
+- `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=dcsh47583` — safe to expose (it's just a CDN
   namespace, not a secret).
-- `NEXT_PUBLIC_WA_NUMBER` — the sales WA number, centralized so it's
-  changed in one place if Yulia's number ever changes.
+- `NEXT_PUBLIC_WA_NUMBER` — the sales WA number (Yulia), centralized in `.env.local` so it's
+  changed in one place if it ever changes. Read via `lib/site.ts`.
 - No other secrets needed for v1 — no API keys, no database URL.
 
 ## 6. WhatsApp CTA Component
 
-Single shared component builds the link:
+`buildWaLink` in `lib/wa.ts` builds the link:
 
 ```
 https://wa.me/<NEXT_PUBLIC_WA_NUMBER>?text=<url-encoded prefilled message>
 ```
 
-Each section passes its own context-aware message (e.g. "Halo, saya
-tertarik dengan Tipe Adhinata di The Brawijaya") so the sales agent
+Each section passes its own context-aware message (e.g. "Halo Kak Yulia,
+saya tertarik dengan Tipe Adhinata di The Brawijaya") so the sales agent
 knows what the visitor was looking at.
 
 ## 7. Security Posture
@@ -112,8 +113,8 @@ Because there's no backend, the threat surface is mainly client-side:
 
 ## 8a. Runtime Memory Safety
 
-This page is mostly static, but a few client components will have
-subscriptions (scroll-based header state, carousel autoplay, intersection
+This page is mostly static, but a few client components have
+subscriptions (scroll-based navbar state, carousel scroll tracking, intersection
 observers for scroll-in animations). Every one of these **must** clean up
 in its `useEffect` return — this is a hard requirement in AGENTS.md §3,
 not optional polish. An uncleaned listener/interval is exactly the class

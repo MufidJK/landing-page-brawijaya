@@ -10,7 +10,7 @@ import { getCloudinaryUrl } from '@/lib/cloudinary';
 import { buildWaLink } from '@/lib/wa';
 import { site } from '@/lib/site';
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogTitle, DialogClose } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 
@@ -23,15 +23,17 @@ export default function UnitSection({ unit, variant }: UnitSectionProps) {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [lightboxType, setLightboxType] = useState<'photo' | 'plan'>('photo');
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
   const carouselRef = useRef<HTMLDivElement>(null);
 
-  const waMessage = `Halo Kak ${site.marketing.name}, saya tertarik dengan ${unit.name} di The Brawijaya dan ingin informasi lebih lanjut 🙏`;
+  const waMessage = `Halo Ibu ${site.marketing.name}, saya tertarik dengan ${unit.name} di The Brawijaya dan ingin informasi lebih lanjut!`;
   const waLink = buildWaLink(waMessage);
 
   const isIvory = variant === 'ivory';
-  const bgClass = isIvory ? 'bg-[#F7F3EA]' : 'bg-[#0F3D2E]';
-  const textClass = isIvory ? 'text-[#1F2421]' : 'text-[#F7F3EA]';
-  const mutedClass = isIvory ? 'text-[#1F2421]/70' : 'text-[#F7F3EA]/80';
+  const bgClass = isIvory ? 'bg-brand-ivory' : 'bg-brand-emerald';
+  const textClass = isIvory ? 'text-brand-charcoal' : 'text-brand-ivory';
+  const mutedClass = isIvory ? 'text-brand-charcoal/70' : 'text-brand-ivory/80';
 
   const highlights = unit.id === 'aryasatya' 
     ? ['Kanopi beton gratis', 'Bata merah', 'Smart lock']
@@ -61,6 +63,51 @@ export default function UnitSection({ unit, variant }: UnitSectionProps) {
     }
   };
 
+  // Track carousel scroll boundaries
+  useEffect(() => {
+    const el = carouselRef.current;
+    if (!el) return;
+
+    let rafId: number | null = null;
+
+    const updateScrollState = () => {
+      const left = el.scrollLeft > 4;
+      const right = el.scrollLeft + el.clientWidth < el.scrollWidth - 4;
+      
+      if (left !== canScrollLeft) setCanScrollLeft(left);
+      if (right !== canScrollRight) setCanScrollRight(right);
+    };
+
+    const onScrollOrResize = () => {
+      if (rafId !== null) return;
+      rafId = requestAnimationFrame(() => {
+        updateScrollState();
+        rafId = null;
+      });
+    };
+
+    updateScrollState(); // initial
+    el.addEventListener('scroll', onScrollOrResize, { passive: true });
+    window.addEventListener('resize', onScrollOrResize, { passive: true });
+
+    return () => {
+      el.removeEventListener('scroll', onScrollOrResize);
+      window.removeEventListener('resize', onScrollOrResize);
+      if (rafId !== null) cancelAnimationFrame(rafId);
+    };
+  }, [canScrollLeft, canScrollRight]);
+
+  // Recompute on image load
+  const handleImageLoad = () => {
+    const el = carouselRef.current;
+    if (!el) return;
+    const left = el.scrollLeft > 4;
+    const right = el.scrollLeft + el.clientWidth < el.scrollWidth - 4;
+    if (left !== canScrollLeft) setCanScrollLeft(left);
+    if (right !== canScrollRight) setCanScrollRight(right);
+  };
+
+  // Lightbox keyboard navigation
   useEffect(() => {
     if (!lightboxOpen) return;
 
@@ -86,7 +133,7 @@ export default function UnitSection({ unit, variant }: UnitSectionProps) {
     : unit.floorPlanIds[lightboxIndex];
 
   return (
-    <section id={unit.id} className={`${bgClass} ${textClass} py-16 px-4 relative scroll-mt-[72px]`}>
+    <section id={unit.id} className={`${bgClass} ${textClass} py-16 px-4 relative scroll-mt-18`}>
       <div className="container mx-auto max-w-6xl">
         {/* Header */}
         <div className="mb-8">
@@ -97,13 +144,13 @@ export default function UnitSection({ unit, variant }: UnitSectionProps) {
             {unit.landDimensions} | LB {unit.buildingArea} | LT {unit.landArea}
           </p>
           <div className="flex flex-wrap gap-2">
-            <Badge variant="outline" className={`${isIvory ? 'border-[#0F3D2E] text-[#0F3D2E]' : 'border-[#C8A24A] text-[#C8A24A]'}`}>
+            <Badge variant="outline" className={`${isIvory ? 'border-brand-emerald text-brand-emerald' : 'border-brand-gold text-brand-gold'}`}>
               {unit.bedrooms} Kamar Tidur
             </Badge>
-            <Badge variant="outline" className={`${isIvory ? 'border-[#0F3D2E] text-[#0F3D2E]' : 'border-[#C8A24A] text-[#C8A24A]'}`}>
+            <Badge variant="outline" className={`${isIvory ? 'border-brand-emerald text-brand-emerald' : 'border-brand-gold text-brand-gold'}`}>
               {unit.bathrooms} Kamar Mandi
             </Badge>
-            <Badge variant="outline" className={`${isIvory ? 'border-[#0F3D2E] text-[#0F3D2E]' : 'border-[#C8A24A] text-[#C8A24A]'}`}>
+            <Badge variant="outline" className={`${isIvory ? 'border-brand-emerald text-brand-emerald' : 'border-brand-gold text-brand-gold'}`}>
               {unit.carport || 'Carport'}
             </Badge>
           </div>
@@ -131,6 +178,7 @@ export default function UnitSection({ unit, variant }: UnitSectionProps) {
                   sizes="(max-width: 768px) 70vw, (max-width: 1024px) 40vw, 24vw"
                   loading={index === 0 ? 'eager' : 'lazy'}
                   priority={index === 0}
+                  onLoad={handleImageLoad}
                 />
               </button>
             ))}
@@ -138,16 +186,24 @@ export default function UnitSection({ unit, variant }: UnitSectionProps) {
           <button
             type="button"
             onClick={() => scrollCarousel('left')}
-            className={`absolute left-2 top-1/2 -translate-y-1/2 ${isIvory ? 'bg-white/90 text-[#0F3D2E]' : 'bg-[#0F3D2E]/90 text-white'} p-2 rounded-full shadow-lg hover:scale-110 transition-transform`}
+            className={`absolute left-2 top-1/2 -translate-y-1/2 ${isIvory ? 'bg-white/90 text-brand-emerald' : 'bg-brand-emerald/90 text-white'} p-2 rounded-full shadow-lg hover:scale-110 transition-all duration-200 ${
+              canScrollLeft ? 'opacity-100' : 'opacity-0 pointer-events-none'
+            }`}
             aria-label="Previous photos"
+            tabIndex={canScrollLeft ? 0 : -1}
+            aria-hidden={!canScrollLeft}
           >
             <ChevronLeft className="h-6 w-6" />
           </button>
           <button
             type="button"
             onClick={() => scrollCarousel('right')}
-            className={`absolute right-2 top-1/2 -translate-y-1/2 ${isIvory ? 'bg-white/90 text-[#0F3D2E]' : 'bg-[#0F3D2E]/90 text-white'} p-2 rounded-full shadow-lg hover:scale-110 transition-transform`}
+            className={`absolute right-2 top-1/2 -translate-y-1/2 ${isIvory ? 'bg-white/90 text-brand-emerald' : 'bg-brand-emerald/90 text-white'} p-2 rounded-full shadow-lg hover:scale-110 transition-all duration-200 ${
+              canScrollRight ? 'opacity-100' : 'opacity-0 pointer-events-none'
+            }`}
             aria-label="Next photos"
+            tabIndex={canScrollRight ? 0 : -1}
+            aria-hidden={!canScrollRight}
           >
             <ChevronRight className="h-6 w-6" />
           </button>
@@ -160,7 +216,7 @@ export default function UnitSection({ unit, variant }: UnitSectionProps) {
             {highlights.map((highlight) => (
               <div
                 key={highlight}
-                className={`px-4 py-2 rounded-lg ${isIvory ? 'bg-white border border-[#0F3D2E]/20' : 'bg-[#0F3D2E]/50 border border-[#C8A24A]/30'}`}
+                className={`px-4 py-2 rounded-lg ${isIvory ? 'bg-white border border-brand-emerald/20' : 'bg-brand-emerald/50 border border-brand-gold/30'}`}
               >
                 <span className="text-sm font-medium">{highlight}</span>
               </div>
@@ -175,7 +231,7 @@ export default function UnitSection({ unit, variant }: UnitSectionProps) {
             {unit.floorPlanIds.map((planId, index) => (
               <Card
                 key={planId}
-                className={`overflow-hidden cursor-pointer hover:shadow-xl transition-shadow ${isIvory ? 'bg-white' : 'bg-[#F7F3EA]'}`}
+                className={`overflow-hidden cursor-pointer hover:shadow-xl transition-shadow ${isIvory ? 'bg-white' : 'bg-brand-ivory'}`}
                 onClick={() => openLightbox(index, 'plan')}
               >
                 <div className="relative w-full aspect-[3/4] bg-gray-50">
@@ -189,7 +245,7 @@ export default function UnitSection({ unit, variant }: UnitSectionProps) {
                   />
                 </div>
                 <div className="p-4 text-center">
-                  <p className="font-medium text-[#1F2421]">
+                  <p className="font-medium text-brand-charcoal">
                     {FLOOR_PLAN_LABELS[(index + 1) as keyof typeof FLOOR_PLAN_LABELS]}
                   </p>
                 </div>
@@ -203,7 +259,7 @@ export default function UnitSection({ unit, variant }: UnitSectionProps) {
           <Button
             asChild
             size="lg"
-            className="bg-[#C8A24A] hover:bg-[#B8943A] text-[#1F2421] font-semibold shadow-lg hover:shadow-xl transition-all"
+            className="bg-brand-gold hover:bg-brand-gold-hover text-brand-charcoal font-semibold shadow-lg hover:shadow-xl transition-all"
           >
             <a href={waLink} target="_blank" rel="noopener noreferrer">
               Tanya {unit.name}
@@ -215,6 +271,9 @@ export default function UnitSection({ unit, variant }: UnitSectionProps) {
       {/* Lightbox Dialog */}
       <Dialog open={lightboxOpen} onOpenChange={setLightboxOpen}>
         <DialogContent className="max-w-5xl p-0 bg-black/95 border-none">
+          <DialogTitle className="sr-only">
+            {lightboxType === 'photo' ? 'Galeri foto' : 'Denah'}
+          </DialogTitle>
           <div className="relative w-full h-[80vh]">
             <Image
               src={getCloudinaryUrl(currentLightboxImage, 'f_auto,q_auto')}
@@ -227,7 +286,9 @@ export default function UnitSection({ unit, variant }: UnitSectionProps) {
             <button
               type="button"
               onClick={() => navigateLightbox('prev')}
-              className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 text-black p-3 rounded-full shadow-lg hover:scale-110 transition-transform"
+              data-lightbox-arrow
+              data-dir="prev"
+              className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 text-black p-3 rounded-full shadow-lg hover:scale-110 hover:bg-white transition-transform flex items-center justify-center"
               aria-label="Previous"
             >
               <ChevronLeft className="h-8 w-8" />
@@ -235,19 +296,22 @@ export default function UnitSection({ unit, variant }: UnitSectionProps) {
             <button
               type="button"
               onClick={() => navigateLightbox('next')}
-              className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 text-black p-3 rounded-full shadow-lg hover:scale-110 transition-transform"
+              data-lightbox-arrow
+              data-dir="next"
+              className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 text-black p-3 rounded-full shadow-lg hover:scale-110 hover:bg-white transition-transform flex items-center justify-center"
               aria-label="Next"
             >
               <ChevronRight className="h-8 w-8" />
             </button>
-            <button
-              type="button"
-              onClick={() => setLightboxOpen(false)}
-              className="absolute top-4 right-4 bg-white/90 text-black p-2 rounded-full shadow-lg hover:scale-110 transition-transform"
-              aria-label="Close"
-            >
-              <X className="h-6 w-6" />
-            </button>
+            <DialogClose asChild>
+              <button
+                type="button"
+                className="absolute top-4 right-4 bg-white/90 text-black p-2 rounded-full shadow-lg hover:scale-110 transition-transform"
+                aria-label="Tutup"
+              >
+                <X className="h-6 w-6" />
+              </button>
+            </DialogClose>
           </div>
         </DialogContent>
       </Dialog>

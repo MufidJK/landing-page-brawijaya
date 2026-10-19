@@ -9,7 +9,7 @@ export default function Home() {
     <>
       <Hero />
       <UnitSection unit={units[0]} variant="ivory" />
-      <Separator className="bg-[#C8A24A]" />
+      <Separator className="bg-brand-gold" />
       <UnitSection unit={units[1]} variant="emerald" />
       <LocationSection />
     </>

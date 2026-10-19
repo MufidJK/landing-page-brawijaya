@@ -7,7 +7,7 @@ Tangerang Selatan. This site is a **sales/lead-gen tool**, not a full company
 site — its only job is to convince a visitor to contact Yulia (the sales
 agent) via WhatsApp.
 
-Design reference (structure + visual language, not content):
+Design reference (visual language + structure, facts rewritten in our own words):
 https://thebrawijaya.co.id/
 
 ## 2. Goals
@@ -31,24 +31,33 @@ https://thebrawijaya.co.id/
 
 - Prospective home buyers browsing on mobile, often from a social
   media ad or shared WA link.
-- Budget range Rp900Jt–Rp1,2M — price-sensitive, comparison-shopping
+- Budget range Rp970Jt–Rp1,2M — price-sensitive, comparison-shopping
   against other Serpong/BSD clusters.
 
-## 5. Page Sections (in order)
+## 5. Page Sections (v1 status)
 
-1. **Hero** — headline, price-from, primary CTA button (WA link)
-2. **Promo banner** — "September Ceria" promo period, DP Rp10jt all-in
-3. **Gallery** — interior/exterior photos from the uploaded set
-   (curated subset, not all ~30 images)
-4. **Unit types** — two cards/tabs:
-   - **Tipe Aryasatya** — LB 68m², LT 55m² (5x11m²), 3BR/2BA
-   - **Tipe Adhinata** — LB 83m², LT 66m² (6x11m²), 3BR/2BA, carport 2 mobil
-5. **Free bonus list** — 3 unit AC, canopy, smart door lock, pompa air,
-   toren, DP 5%*, BPHTB*, biaya surat s/d SHM*
-6. **Location highlights** — distance chips (Stasiun Rawa Buntu, Tol
-   Serpong, sekolah, pusat perbelanjaan)
-7. **Closing CTA / contact** — repeat WA CTA, agent name (Yulia) + number,
-   S&K berlaku disclaimer
+**Built (live in code):**
+1. **Hero** — headline, price from Rp970 juta, primary CTA button (WA link)
+2. **Tipe Aryasatya** — LB 68m², LT 55m² (5x11m), 3KT/2KM, photo carousel + floor plans, highlights, WA CTA
+3. **Tipe Adhinata** — LB 83m², LT 66m² (6x11m), 3KT/2KM, carport 2 mobil, photo carousel + floor plans, highlights, WA CTA
+4. **Lokasi Strategis** — 6 distance chips (Tol BSD, Stasiun Rawa Buntu, The Breeze, Eka Hospital, Sekolah Cikal, Pasar Modern BSD), WA CTA
+
+**Global (live in code):**
+- Navbar (scroll-spy, responsive Sheet on mobile)
+- Footer (brand, links, contact, developer, disclaimer)
+- Floating WhatsApp button (bottom-right, safe-area aware)
+
+**Planned / pending client confirmation (Phase 2):**
+- Keunggulan/gratisan — 3 unit AC, canopy, smart door lock, pompa air,
+  toren, DP 5%*, BPHTB*, biaya surat s/d SHM* (verify with client)
+- Galeri — curated interior/exterior photos (select best ~8–12 from uploaded set)
+- Legalitas — PBG signboard photo + text
+- Kontak — repeat WA CTA, agent info, S&K berlaku disclaimer
+
+**Pricing (confirmed):**
+- Price from: Rp970 juta (read from `lib/site.ts`)
+- Booking fee: Rp10 juta all-in
+- Installments: from ~Rp6 juta/month
 
 ## 6. Functional Requirements
 
@@ -76,15 +85,17 @@ https://thebrawijaya.co.id/
 
 ## 8. Content Source
 
-- Marketing copy: provided September Ceria promo text (Bahasa Indonesia).
-- Photos: uploaded image set (mix of exterior, interior, bathroom shots) —
-  curate best ~8–12 for the gallery, not the full batch.
-- Contact: Yulia, 0812 9262066.
+- Marketing copy: rewritten in our own words from reference site + client input.
+- Photos: Cloudinary public IDs (Aryasatya: 11 photos + 3 floor plans; Adhinata: 9 photos + 3 floor plans).
+- Contact: Yulia (marketing), WA number in `.env.local`, Instagram @thebrawijaya.official.
 
 ## 9. Definition of Done (v1)
 
-- All 7 sections above implemented and content-complete.
+- All built sections above (Hero, Aryasatya, Adhinata, Lokasi, global components) implemented and content-complete.
 - Verified responsive at common breakpoints (360px, 768px, 1024px, 1440px).
 - All WA CTA links tested and open with correct prefilled text.
 - Lighthouse mobile score: Performance ≥ 90, Accessibility ≥ 95.
 - No `any` types, tests passing (see AGENTS.md), no console errors/warnings.
+- `npm run check` passes (typecheck + lint + tests).
+
+**Phase 2** = remaining planned sections (Keunggulan, Galeri, Legalitas, Kontak) after client confirmation on content.

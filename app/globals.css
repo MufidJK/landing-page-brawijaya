@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
 @layer base {
   :root {
@@ -90,8 +91,11 @@
   --radius-sm: calc(var(--radius) - 4px);
   --color-brand-emerald: #0F3D2E;
   --color-brand-gold: #C8A24A;
+  --color-brand-gold-hover: #B8943A;
   --color-brand-ivory: #F7F3EA;
   --color-brand-charcoal: #1F2421;
+  --color-whatsapp: #25D366;
+  --color-whatsapp-hover: #20BA5A;
 }
 
 @layer base {
@@ -101,4 +105,21 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+@media (max-width: 767px) {
+  [data-lightbox-arrow] {
+    width: 36px;
+    height: 36px;
+    background-color: rgb(0 0 0 / 0.35);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgb(255 255 255 / 0.25);
+    color: #fff;
+  }
+  [data-lightbox-arrow]:hover { background-color: rgb(0 0 0 / 0.5); }
+  [data-lightbox-arrow] svg { width: 16px; height: 16px; }
+  [data-lightbox-arrow][data-dir="prev"] { left: 8px; }
+  [data-lightbox-arrow][data-dir="next"] { right: 8px; }
+  [data-lightbox-arrow]::before { content: ""; position: absolute; inset: -4px; }
 }
