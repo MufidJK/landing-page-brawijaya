@@ -24,12 +24,13 @@ describe('Footer', () => {
   it('shows disclaimer text', () => {
     render(<Footer />);
     
-    expect(screen.getByText(/gambar dan ilustrasi/i)).toBeInTheDocument();
+    expect(screen.getByText(/© 2026 The Brawijaya/i)).toBeInTheDocument();
+    expect(screen.getByText(/seluruh hak cipta dilindungi/i)).toBeInTheDocument();
   });
 
-  it('shows developer name', () => {
+  it('does not show developer name', () => {
     render(<Footer />);
     
-    expect(screen.getByText(/PT Mitra Sinergi Development/i)).toBeInTheDocument();
+    expect(screen.queryByText(/PT Mitra Sinergi Development/i)).not.toBeInTheDocument();
   });
 });

@@ -30,8 +30,8 @@ describe('LocationSection', () => {
   it('shows correct labels', () => {
     render(<LocationSection />);
     
-    // Spot check a few key locations (text split by en-dash)
-    expect(screen.getByText(/tol bsd.*bintaro/i)).toBeInTheDocument();
+    // Spot check a few key locations (plain hyphen now)
+    expect(screen.getByText(/tol bsd-bintaro/i)).toBeInTheDocument();
     expect(screen.getByText('Stasiun Rawa Buntu')).toBeInTheDocument();
     expect(screen.getByText('The Breeze')).toBeInTheDocument();
     expect(screen.getByText('Eka Hospital')).toBeInTheDocument();

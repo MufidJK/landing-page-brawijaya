@@ -80,13 +80,10 @@ export default function Footer() {
 
         <Separator className="bg-brand-gold/30 mb-6" />
 
-        {/* Bottom */}
-        <div className="space-y-3 text-sm text-brand-ivory/70 text-center md:text-left">
-          <p>Developed by {site.developer}</p>
-          <p className="text-xs">
-            Gambar dan ilustrasi yang ditampilkan adalah visualisasi pemasaran. 
-            Detail produk dapat berubah sewaktu-waktu tanpa pemberitahuan terlebih dahulu. 
-            Pastikan untuk mengonfirmasi spesifikasi terkini dengan tim marketing kami.
+        {/* Copyright */}
+        <div className="text-center">
+          <p className="text-sm text-brand-ivory/60">
+            © 2026 The Brawijaya. Seluruh hak cipta dilindungi.
           </p>
         </div>
       </div>

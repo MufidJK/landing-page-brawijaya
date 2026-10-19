@@ -23,7 +23,7 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   title: "The Brawijaya - Cluster Modern Klasik di Serpong",
-  description: "The Brawijaya — cluster 2 lantai bergaya klasik modern di Serpong, Tangerang Selatan. Mulai dari Rp900 Juta.",
+  description: "The Brawijaya, cluster 2 lantai bergaya klasik modern di Serpong, Tangerang Selatan. Mulai dari Rp970 Juta.",
 };
 
 export default function RootLayout({

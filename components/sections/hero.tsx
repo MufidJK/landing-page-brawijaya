@@ -33,7 +33,7 @@ export default function Hero() {
           </h1>
           
           <p className="text-lg md:text-xl lg:text-2xl mb-6 text-white/95">
-            {site.brand} — {site.description}
+            The Brawijaya, {site.description}.
           </p>
           
           <p className="text-2xl md:text-3xl font-semibold mb-8 text-brand-gold">

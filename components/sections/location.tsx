@@ -38,7 +38,7 @@ export default function LocationSection() {
 
   return (
     <section
-      id="lokasi"
+      id="keunggulan"
       ref={sectionRef}
       className={`bg-brand-ivory text-brand-charcoal py-16 px-4 transition-opacity duration-700 scroll-mt-18 ${
         isVisible ? 'opacity-100' : 'opacity-0'

@@ -10,7 +10,7 @@ export type LocationItem = {
 export const locations: readonly LocationItem[] = [
   {
     id: 'tol-bsd-bintaro',
-    label: 'Tol BSD – Bintaro',
+    label: 'Tol BSD-Bintaro',
     minutes: 10,
     icon: Car,
   },
