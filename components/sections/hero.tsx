@@ -8,7 +8,7 @@ export default function Hero() {
   const waLink = buildWaLink(`Halo Ibu ${site.marketing.name}, saya tertarik dengan The Brawijaya dan ingin informasi lebih lanjut!`);
   
   return (
-    <section id="beranda" className="relative bg-brand-emerald min-h-[100svh] scroll-mt-18">
+    <section id="beranda" className="relative bg-brand-emerald min-h-svh scroll-mt-18">
       {/* Hero Image */}
       <div className="absolute inset-x-0 top-0 h-[60svh] md:inset-0 md:h-auto z-0">
         <Image
@@ -26,7 +26,7 @@ export default function Hero() {
       </div>
 
       {/* Content — vertically centered, left-aligned */}
-      <div className="relative z-10 container mx-auto px-4 flex items-center min-h-[100svh]">
+      <div className="relative z-10 container mx-auto px-4 flex items-center min-h-svh">
         <div className="max-w-2xl">
           <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-white tracking-tight">
             Elegan di Setiap Detail

@@ -17,7 +17,7 @@ export default function FloatingWhatsApp() {
         paddingRight: 'calc(1rem + env(safe-area-inset-right, 0px))',
       }}
     >
-      <FaWhatsapp className="h-[30px] w-[30px]" />
+      <FaWhatsapp className="h-7.5 w-7.5" />
     </a>
   );
 }

@@ -168,7 +168,7 @@ export default function UnitSection({ unit, variant }: UnitSectionProps) {
                 key={photoId}
                 type="button"
                 onClick={() => openLightbox(index, 'photo')}
-                className="relative flex-shrink-0 snap-start w-[70%] md:w-[40%] lg:w-[24%] aspect-[3/4] rounded-lg overflow-hidden hover:opacity-90 transition-opacity"
+                className="relative shrink-0 snap-start w-[70%] md:w-[40%] lg:w-[24%] aspect-3/4 rounded-lg overflow-hidden hover:opacity-90 transition-opacity"
               >
                 <Image
                   src={getCloudinaryUrl(photoId, 'f_auto,q_auto')}
@@ -234,7 +234,7 @@ export default function UnitSection({ unit, variant }: UnitSectionProps) {
                 className={`overflow-hidden cursor-pointer hover:shadow-xl transition-shadow ${isIvory ? 'bg-white' : 'bg-brand-ivory'}`}
                 onClick={() => openLightbox(index, 'plan')}
               >
-                <div className="relative w-full aspect-[3/4] bg-gray-50">
+                <div className="relative w-full aspect-3/4 bg-gray-50">
                   <Image
                     src={getCloudinaryUrl(planId, 'f_auto,q_auto')}
                     alt={`${unit.name} ${FLOOR_PLAN_LABELS[(index + 1) as keyof typeof FLOOR_PLAN_LABELS]}`}
