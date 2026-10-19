@@ -55,6 +55,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-brand-gold transition-colors"
+                  aria-label="Hubungi Yulia via WhatsApp"
                 >
                   {site.marketing.name}
                 </a>

@@ -48,7 +48,7 @@ export default function LocationSection() {
         {/* Header */}
         <div className="text-center mb-12">
           <h2 className="font-serif text-4xl md:text-5xl font-bold mb-4">
-            Lokasi Strategis di Serpong, Tangerang Selatan
+            Lokasi Strategis di Buaran Serpong, Tangerang Selatan
           </h2>
           <p className="text-lg text-brand-charcoal/70 max-w-3xl mx-auto">
             The Brawijaya terletak di lokasi yang strategis dengan akses mudah ke Stasiun Rawa Buntu, 

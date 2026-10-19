@@ -189,7 +189,7 @@ export default function UnitSection({ unit, variant }: UnitSectionProps) {
             className={`absolute left-2 top-1/2 -translate-y-1/2 ${isIvory ? 'bg-white/90 text-brand-emerald' : 'bg-brand-emerald/90 text-white'} p-2 rounded-full shadow-lg hover:scale-110 transition-all duration-200 ${
               canScrollLeft ? 'opacity-100' : 'opacity-0 pointer-events-none'
             }`}
-            aria-label="Previous photos"
+            aria-label="Foto sebelumnya"
             tabIndex={canScrollLeft ? 0 : -1}
             aria-hidden={!canScrollLeft}
           >
@@ -201,7 +201,7 @@ export default function UnitSection({ unit, variant }: UnitSectionProps) {
             className={`absolute right-2 top-1/2 -translate-y-1/2 ${isIvory ? 'bg-white/90 text-brand-emerald' : 'bg-brand-emerald/90 text-white'} p-2 rounded-full shadow-lg hover:scale-110 transition-all duration-200 ${
               canScrollRight ? 'opacity-100' : 'opacity-0 pointer-events-none'
             }`}
-            aria-label="Next photos"
+            aria-label="Foto berikutnya"
             tabIndex={canScrollRight ? 0 : -1}
             aria-hidden={!canScrollRight}
           >

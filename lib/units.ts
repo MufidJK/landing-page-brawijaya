@@ -27,6 +27,7 @@ export const units: readonly UnitType[] = [
     landDimensions: '5x11',
     bedrooms: 3,
     bathrooms: 2,
+    carport: 'Carport',
     coverImageId: 'aryasatya1_vywvat',
     photoIds: [
       'aryasatya1_vywvat',
@@ -55,7 +56,7 @@ export const units: readonly UnitType[] = [
     landDimensions: '6x11',
     bedrooms: 3,
     bathrooms: 2,
-    carport: '2-car carport',
+    carport: 'Carport 2 Mobil',
     coverImageId: 'adhinata1_v85il0',
     photoIds: [
       'adhinata1_v85il0',
