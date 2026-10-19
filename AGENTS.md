@@ -84,6 +84,8 @@ npm install -D jest jest-environment-jsdom @testing-library/react @testing-libra
 - **No hardcoded secrets or phone numbers scattered across files.** WA
   number, Cloudinary cloud name, and any other config values live in one
   constants file (e.g. `lib/site.ts`) or `.env` as appropriate.
+- **No em dashes or en dashes (— –) in user-facing copy.** Use commas,
+  periods, or plain hyphens. Reads cleaner, avoids encoding issues.
 - **Every `useEffect` that subscribes to something must clean up after
   itself.** This means: event listeners (`scroll`, `resize`), `setTimeout`/
   `setInterval`, `IntersectionObserver`/`MutationObserver`, media query

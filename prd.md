@@ -40,7 +40,7 @@ https://thebrawijaya.co.id/
 1. **Hero** — headline, price from Rp970 juta, primary CTA button (WA link)
 2. **Tipe Aryasatya** — LB 68m², LT 55m² (5x11m), 3KT/2KM, photo carousel + floor plans, highlights, WA CTA
 3. **Tipe Adhinata** — LB 83m², LT 66m² (6x11m), 3KT/2KM, carport 2 mobil, photo carousel + floor plans, highlights, WA CTA
-4. **Lokasi Strategis** — 6 distance chips (Tol BSD, Stasiun Rawa Buntu, The Breeze, Eka Hospital, Sekolah Cikal, Pasar Modern BSD), WA CTA
+4. **Keunggulan** — 6 distance chips (Tol BSD, Stasiun Rawa Buntu, The Breeze, Eka Hospital, Sekolah Cikal, Pasar Modern BSD), WA CTA
 
 **Global (live in code):**
 - Navbar (scroll-spy, responsive Sheet on mobile)

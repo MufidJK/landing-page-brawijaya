@@ -7,7 +7,6 @@ export const site = {
   instagram: 'thebrawijaya.official',
   description: 'Cluster 2 lantai bergaya klasik modern di Serpong, Tangerang Selatan',
   location: 'Serpong, Tangerang Selatan',
-  developer: 'PT Mitra Sinergi Development',
   marketing: {
     name: 'Yulia',
   },

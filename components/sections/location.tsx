@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import { locations } from '@/lib/location';
 import { buildWaLink } from '@/lib/wa';
 import { site } from '@/lib/site';
-import { Button } from '@/components/ui/button';
+import WhatsAppCTA from '@/components/whatsapp-cta';
 
 export default function LocationSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -80,15 +80,10 @@ export default function LocationSection() {
 
         {/* CTA */}
         <div className="text-center">
-          <Button
-            asChild
-            size="lg"
-            className="bg-brand-gold hover:bg-brand-gold-hover text-brand-charcoal font-semibold shadow-lg hover:shadow-xl transition-all"
-          >
-            <a href={waLink} target="_blank" rel="noopener noreferrer">
-              Jadwalkan Kunjungan
-            </a>
-          </Button>
+          <WhatsAppCTA 
+            href={waLink}
+            label="Jadwalkan Kunjungan"
+          />
         </div>
       </div>
     </section>

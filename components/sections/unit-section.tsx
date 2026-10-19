@@ -9,7 +9,7 @@ import { FLOOR_PLAN_LABELS } from '@/lib/units';
 import { getCloudinaryUrl } from '@/lib/cloudinary';
 import { buildWaLink } from '@/lib/wa';
 import { site } from '@/lib/site';
-import { Button } from '@/components/ui/button';
+import WhatsAppCTA from '@/components/whatsapp-cta';
 import { Dialog, DialogContent, DialogTitle, DialogClose } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
@@ -256,15 +256,10 @@ export default function UnitSection({ unit, variant }: UnitSectionProps) {
 
         {/* CTA */}
         <div className="text-center">
-          <Button
-            asChild
-            size="lg"
-            className="bg-brand-gold hover:bg-brand-gold-hover text-brand-charcoal font-semibold shadow-lg hover:shadow-xl transition-all"
-          >
-            <a href={waLink} target="_blank" rel="noopener noreferrer">
-              Tanya {unit.name}
-            </a>
-          </Button>
+          <WhatsAppCTA 
+            href={waLink}
+            label={`Tanya Tipe ${unit.name.replace('Tipe ', '')}`}
+          />
         </div>
       </div>
 

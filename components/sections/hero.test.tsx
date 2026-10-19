@@ -23,14 +23,14 @@ describe('Hero', () => {
   it('CTA links to WhatsApp', () => {
     render(<Hero />);
     
-    const link = screen.getByRole('link', { name: /hubungi kami/i });
+    const link = screen.getByRole('link', { name: /chat yulia di whatsapp/i });
     expect(link).toHaveAttribute('href', expect.stringContaining('wa.me/6281234567890'));
   });
 
   it('CTA has target="_blank" and rel="noopener noreferrer"', () => {
     render(<Hero />);
     
-    const link = screen.getByRole('link', { name: /hubungi kami/i });
+    const link = screen.getByRole('link', { name: /chat yulia di whatsapp/i });
     expect(link).toHaveAttribute('target', '_blank');
     expect(link).toHaveAttribute('rel', 'noopener noreferrer');
   });

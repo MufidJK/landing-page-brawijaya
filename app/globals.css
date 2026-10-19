@@ -123,3 +123,20 @@
   [data-lightbox-arrow][data-dir="next"] { right: 8px; }
   [data-lightbox-arrow]::before { content: ""; position: absolute; inset: -4px; }
 }
+
+@keyframes pulse-ring {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.1;
+    transform: scale(1.05);
+  }
+}
+
+@layer utilities {
+  .animate-pulse-ring {
+    animation: pulse-ring 2.6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+}

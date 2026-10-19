@@ -39,8 +39,8 @@ components/
   sections/
     hero.tsx          — built
     unit-section.tsx  — built (reusable: Aryasatya ivory, Adhinata emerald)
-    location.tsx      — built
-    (planned: keunggulan.tsx, galeri.tsx, legalitas.tsx, kontak.tsx)
+    location.tsx      — built (Keunggulan section: location advantages)
+    (planned: galeri.tsx, legalitas.tsx, kontak.tsx)
   navbar.tsx          — built (scroll-spy, responsive Sheet on mobile)
   footer.tsx          — built
   floating-whatsapp.tsx — built
