@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { site, navItems } from '@/lib/site';
 import { buildWaLink } from '@/lib/wa';
+import { getCloudinaryUrl } from '@/lib/cloudinary';
 import { Separator } from '@/components/ui/separator';
 
 export default function Footer() {
@@ -16,7 +17,7 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <Image
-              src="/logo-the-brawijaya.webp"
+              src={getCloudinaryUrl('logo-the-brawijaya_u3zdci', 'f_auto,q_auto,w_300')}
               alt="The Brawijaya"
               width={150}
               height={107}
