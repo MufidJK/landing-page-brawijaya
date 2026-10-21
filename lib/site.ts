@@ -1,5 +1,6 @@
 export const site = {
   brand: 'The Brawijaya',
+  siteUrl: 'https://brawijaya-serpong.vercel.app',
   waNumber: process.env.NEXT_PUBLIC_WA_NUMBER,
   priceFrom: 'Rp970 Juta',
   bookingFee: 'Rp10 juta all-in',
