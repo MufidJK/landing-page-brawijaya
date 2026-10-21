@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { Menu } from 'lucide-react';
 import { site, navItems } from '@/lib/site';
 import { buildWaLink } from '@/lib/wa';
+import { getCloudinaryUrl } from '@/lib/cloudinary';
 import { Button } from '@/components/ui/button';
 import {
   Sheet,
@@ -115,7 +116,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="#beranda" className="relative" onClick={(e) => handleNavClick(e, '#beranda')}>
           <Image
-            src="/logo-the-brawijaya.webp"
+            src={getCloudinaryUrl('logo-the-brawijaya_u3zdci', 'f_auto,q_auto,w_300')}
             alt="The Brawijaya"
             width={150}
             height={107}
@@ -174,7 +175,7 @@ export default function Navbar() {
             <SheetHeader>
               <SheetTitle className="flex justify-center">
                 <Image
-                  src="/logo-the-brawijaya.webp"
+                  src={getCloudinaryUrl('logo-the-brawijaya_u3zdci', 'f_auto,q_auto,w_300')}
                   alt="The Brawijaya"
                   width={150}
                   height={107}

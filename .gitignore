@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local assets (now on Cloudinary)
+public/logo-the-brawijaya.webp
