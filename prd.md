@@ -48,11 +48,10 @@ https://thebrawijaya.co.id/
 - Floating WhatsApp button (bottom-right, safe-area aware)
 
 **Planned / pending client confirmation (Phase 2):**
-- Keunggulan/gratisan — 3 unit AC, canopy, smart door lock, pompa air,
-  toren, DP 5%*, BPHTB*, biaya surat s/d SHM* (verify with client)
-- Galeri — curated interior/exterior photos (select best ~8–12 from uploaded set)
-- Legalitas — PBG signboard photo + text
-- Kontak — repeat WA CTA, agent info, S&K berlaku disclaimer
+- Keunggulan/gratisan: 3 unit AC, canopy, smart door lock, pompa air,
+  toren, DP 5%*, BPHTB*, biaya surat s/d SHM* (verify with the client)
+- Galeri: curated interior/exterior photos (select best 8-12 from uploaded set)
+- Kontak: repeat WA CTA, agent info, S&K berlaku disclaimer
 
 **Pricing (confirmed):**
 - Price from: Rp970 juta (read from `lib/site.ts`)

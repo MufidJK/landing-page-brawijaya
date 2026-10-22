@@ -125,7 +125,7 @@ verified cleanup function.
 ## 9. Deployment
 
 - Vercel, connected to the GitHub repo.
-- Preview deployments per branch/PR for mak/Yulia to review before merge
+- Preview deployments per branch/PR for the client to review before merge
   to production.
 
 ## 10. Explicit Non-Decisions (revisit only if needed)
